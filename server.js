@@ -7,22 +7,18 @@ var apiRoutes = require("./app/routing/apiRoutes.js");
 var app = express();
 var PORT = 3000;
 
+//used to parse incomming requests
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
-var users = [];
-
+//get HTML routes
 htmlRoutes(app);
+//get API routes
 apiRoutes(app);
-
-function User(name, photo, scores) {
-	this.name = name;
-	this.photo = photo,
-	this.scores = scores;
-};
 
 app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
 });
+

@@ -162,7 +162,7 @@
 				</div>
 				<div class="modal-body">
 					<h2 id="matchName"></h2>
-					<img id="matchImg" src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg" alt="">
+					<img id="matchImg" src="" alt="">
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -198,7 +198,7 @@
 			var userData = {
 				name: $("#name").val().trim(),
 				photo: $("#photo").val().trim(),
-				scores: [$("#q1").val(), $("#q2").val(), $("#q3").val(), $("#q4").val(), $("#q5").val(), $("#q6").val(), $("#q7").val(), $("#q8").val(), $("#q9").val(), $("#q310").val()]
+				scores: [$("#q1").val(), $("#q2").val(), $("#q3").val(), $("#q4").val(), $("#q5").val(), $("#q6").val(), $("#q7").val(), $("#q8").val(), $("#q9").val(), $("#q10").val()]
 			}
 
 			//Grab site URL
@@ -206,8 +206,8 @@
 
 			$.post(currentURL + '/api/friends', userData, function(data) {
 				$("#matchName").text(data.name);
-				$("#matchImg")attr("src", data.photo);
-				$("resultsModal").modal("toggle");
+				$("#matchImg").attr("src", data.photo);
+				$("#resultsModal").modal("toggle");
 			});
 		} else {
 			alert("Please fill out all fields on the form before submitting.");
