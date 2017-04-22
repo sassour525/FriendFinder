@@ -1,8 +1,9 @@
 // Data Routes
 var path = require("path");
+var users = require("../data/friends.js");
 
 //array to hold each user of the site
-var users = [];
+// var users = [];
 //export the paths to be used in the server.js file
 module.exports = function(app) {
 
@@ -13,21 +14,11 @@ module.exports = function(app) {
 
 	//post data from survey entries / calculate match
 	app.post("/api/friends", function(req, res) {
+		//grab the request body details
 		var userReq = req.body;
-		console.log(userReq);
-
-		//user constructor
-		function User(name, photo, scores) {
-			this.name = name;
-			this.photo = photo;
-			this.scores = scores;
-		};
-
-		//use constructor to create new user
-		var newUser = new User(userReq.name, userReq.photo, userReq.scores);
 
 		//add new entry to users array
-		users.push(newUser);
+		users.push(userReq);
 
 		//array used to calculate match
 	    var totalArray = [];
@@ -35,16 +26,14 @@ module.exports = function(app) {
 	    //loop through users array and compare scores to the new user
 		for (var i = 0; i < users.length; i++) {
 			var totalDifference = 0;
-			for(var j = 0; j < newUser.scores.length; j++) {
-				if (newUser.scores[j] != users[i].scores[j]) {
-					totalDifference += Math.abs(newUser.scores[j] - users[i].scores[j]);
+			for(var j = 0; j < userReq.scores.length; j++) {
+				if (userReq.scores[j] != users[i].scores[j]) {
+					totalDifference += Math.abs(userReq.scores[j] - users[i].scores[j]);
 				} 	
 			}
-			console.log(totalDifference);
 			totalArray.push(totalDifference);
 		}
 
-		console.log("Total Array: " + totalArray);
 		//remove last entry in the array so you do not match with yourself
 		totalArray.pop();
 
@@ -55,7 +44,6 @@ module.exports = function(app) {
 
 		//index of the minimum entry to serve to modal
 		var minimum = totalArray.indexOf(Array.min(totalArray));
-		console.log(minimum);
 
 		//return user object at the index location
 		res.json(users[minimum]);

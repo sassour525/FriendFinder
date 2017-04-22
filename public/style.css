@@ -1,0 +1,20 @@
+body {
+	background: url("shattered.png");
+}
+
+#submit {
+	width: 250px;
+}
+
+.wrapper {
+	background-color: white;
+	padding: 10px;
+}
+
+.jumbotron h1 {
+	color: #337ab7;
+}
+
+h2 {
+	color: #337ab7;
+}
